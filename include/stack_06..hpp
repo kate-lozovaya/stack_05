@@ -99,18 +99,19 @@ auto stack<T>::try_pop() -> std::shared_ptr<T>
 	std::lock_guard<std::mutex> lock(mutex_);
 	if (count_ == 0)
 		return nullptr;
-	auto top = std::make_shared<T>(array_[count_ - 1]);
 	--count_;
-	return top;
+	return std::make_shared<T>(array_[count_];
 }
 template <typename T>
 auto stack<T>::wait_and_pop() -> std::shared_ptr<T>
 {
 	std::unique_lock<std::mutex> lock(mutex_);
-	cond_.wait(lock);
-	auto top = std::make_shared<T>(array_[count_ - 1]);
+	while(!count_)
+	{
+		cond_.wait(mutex_);	
+	}
 	--count_;
-	return top;
+	return std::make_shared<T>(array_[count_];
 }
 template <typename T>
 void stack<T>::swap(stack<T>& other)
