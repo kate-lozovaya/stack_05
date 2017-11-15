@@ -30,10 +30,6 @@ void consumer(stack<int> &Stack)
 				Stack.wait_and_pop();
 			}
 		}
-		catch (std::logic_error)
-		{
-			std::this_thread::sleep_for(std::chrono::seconds(std::rand() % (3) + 2));
-		}
 		std::this_thread::sleep_for(std::chrono::seconds(std::rand() % (3) + 2));
 	}
 }
