@@ -44,7 +44,7 @@ stack<T>::stack(stack<T> const& other)
 	array_ = new_array;
 	try
 	{
-		std::copy(other.array_, other.array_ + count_, stdext::checked_array_iterator<T*>(array_, count_));
+		std::copy(other.array_, other.array_ + count_, array_);
 	}
 	catch (...)
 	{
@@ -80,7 +80,7 @@ void stack<T>::push(T const & value)
 		{
 			array_size_ *= 2;
 			T * new_array = new T[array_size_]();
-			std::copy(array_, array_ + count_, stdext::checked_array_iterator<T*>(new_array, count_));
+			std::copy(array_, array_ + count_, new_array);
 			delete[] array_;
 			array_ = new_array;
 		}
