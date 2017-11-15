@@ -108,7 +108,7 @@ auto stack<T>::wait_and_pop() -> std::shared_ptr<T>
 	std::unique_lock<std::mutex> lock(mutex_);
 	while(!count_)
 	{
-		cond_.wait(mutex_);	
+		cond_.wait(lock);	
 	}
 	--count_;
 	return std::make_shared<T>(array_[count_];
